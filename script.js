@@ -1,31 +1,32 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contact-form');
 
-    // Simple form submission (you'll need to implement the server-side handling)
-    const form = document.getElementById('contact-form');
-    form.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Thank you for your message! (Note: This is a demo, no message was actually sent)');
-        form.reset();
+        
+        // Here you would typically send the form data to a server
+        // For this example, we'll just log it to the console
+        const formData = new FormData(contactForm);
+        console.log('Form submitted with data:');
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+
+        // Clear the form
+        contactForm.reset();
+
+        // Show a confirmation message
+        alert('Thank you for your message! I\'ll get back to you soon.');
     });
 
-    // Add a subtle animation to project elements
-    const projects = document.querySelectorAll('.project');
-    projects.forEach(project => {
-        project.addEventListener('mouseenter', () => {
-            project.style.transform = 'scale(1.05)';
-            project.style.transition = 'transform 0.3s ease';
+    // Add some manga-style effects
+    const headers = document.querySelectorAll('h1, h2, h3');
+    headers.forEach(header => {
+        header.addEventListener('mouseover', () => {
+            header.style.transform = 'scale(1.1) rotate(-2deg)';
         });
-        project.addEventListener('mouseleave', () => {
-            project.style.transform = 'scale(1)';
+        header.addEventListener('mouseout', () => {
+            header.style.transform = 'scale(1) rotate(0)';
         });
     });
 });
